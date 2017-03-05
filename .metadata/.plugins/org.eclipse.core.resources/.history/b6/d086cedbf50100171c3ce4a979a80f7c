@@ -1,0 +1,157 @@
+package StackReferenceBased;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Infix2PostfixConverter {
+	
+	public static boolean isOperator(char c){
+        return (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')');
+    }
+
+    public static boolean getPrecedence(char op1, char op2){
+    	if(op1 == '+' || op1 == '-'){
+    		return !(op2 == '+' || op2 == '-');
+    	}else if(op1 == '*' || op1 == '/'){
+    		return op2 == '(';
+    	}else if(op1 == '('){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public static String infixToPostfix(String infix){
+    	StackReferenceBased s = new StackReferenceBased();
+    	StringTokenizer split = new StringTokenizer(infix, "+-*/()", true);
+    	StringBuffer postfix = new StringBuffer(infix.length());
+    	char c;
+    	while(split.hasMoreTokens()){
+    		String x = split.nextToken();
+    		c = x.charAt(0);
+    		if(x.length() == 1 && isOperator(c)){
+    			while(!s.isEmpty() && !getPrecedence(s.peek().toString().charAt(0),c)){
+    				postfix.append(s.pop().toString());
+    			}
+    			if(c == ')'){
+    				String a = s.pop().toString();
+    				while(a.charAt(0) != '('){
+    					postfix.append(a);
+    					a = s.pop().toString();
+    				}
+    			}else{
+    				s.push(x);
+    			}
+    		}else{
+    			postfix.append(x);
+    		}
+    	}
+    	while(!s.isEmpty()){
+    		postfix.append(s.pop().toString());
+    	}
+    	return postfix.toString();
+    }
+    
+    public static int getResult(String postfix){
+//    	int num1,num2,result=0;
+//    	StackReferenceBased s = new StackReferenceBased();
+//    	String[] num = postfix.split("");
+//    	for(int i = 0; i<num.length; i++){
+//    		String s1 = num[i];
+//    		if(isOperator(s1.charAt(0))){
+//    			s.push(Integer.parseInt(s1));
+//    		}else{
+//    			String s2 = num[i];
+//    			num1 = (int) s.pop();
+//    			num2 = (int) s.pop();
+//    			if(s2.equals("+")){
+//    				result = num1+num2;
+//    			}else if(s2.equals("-")){
+//    				result = num1-num2;
+//    			}else if(s2.equals("*")){
+//    				result = num1*num2;
+//    			}else if(s2.equals("/")){
+//    				result = num1/num2;
+//    			}
+//    			s.push((Object)result);
+//    		}
+//    	}
+//    	result = (int) s.pop();
+//    	return result;
+		StackReferenceBased numberStack = new StackReferenceBased(); //new stack for numbers
+		int number1 = 0;
+		int number2 = 0;
+		int result = 0;
+		
+		postfix = postfix.trim(); //trim off the empty space at the front and back of the postfix
+		String[] numbers = postfix.split(" "); //split up the postfix string into an array seperated by spaces
+		
+		ArrayList<String> tempArrayList = new ArrayList<String>();
+		
+		for(int q = 0; q<numbers.length;q++)
+		{
+			tempArrayList.add(numbers[q]); //add the element of the array to the list
+		}
+				
+		while(tempArrayList.contains(""))
+		{
+			tempArrayList.remove(""); //remove empty spaces
+		}
+		
+		String[] numbers2 = new String[tempArrayList.size()];
+		
+		for(int y = 0; y < numbers2.length; y++)
+		{
+			numbers2[y] = tempArrayList.get(y); //add the arrayList back to a new string array
+		}
+		
+		
+		for(int k = 0; k<numbers2.length; k++)
+		{
+			String token = numbers2[k];
+			if(!"+".equals(token)&& !"-".equals(token) && !"*".equals(token) && !"/".equals(token)) //if it's not a operator (i.e it's a number)
+			{
+				numberStack.push(Integer.parseInt(token)); //push the number onto the stack
+			}
+			
+			else
+			{
+				String operator = numbers2[k];
+				number1 = (int) numberStack.pop(); //take the first two values off the stack to use in operations
+				number2 = (int) numberStack.pop();				
+
+				if(operator.equals("/"))
+				{
+					result= number2/number1;
+				}
+				else if(operator.equals("*"))
+				{
+					result= number1*number2;
+				}
+				else if(operator.equals("+"))
+				{
+					result= number1+number2;
+				}
+				else if(operator.equals("-"))
+				{
+					result= number2-number1;
+				}
+				numberStack.push(result); //push the result back to the stack for future use
+			}
+		}
+		result = (int) numberStack.pop(); //pop the final result off the stack
+		return result;
+    }
+	
+	public static void main(String[] arg){
+		System.out.println("Please enter a infix: ");
+		Scanner S = new Scanner(System.in);
+		String infix = S.nextLine();
+		S.close();
+		String postfix = infixToPostfix(infix);
+		System.out.println("infix: " + infix);
+		System.out.println("postfix: " + postfix);
+		System.out.println("result: " + getResult(postfix));
+		
+	}
+}

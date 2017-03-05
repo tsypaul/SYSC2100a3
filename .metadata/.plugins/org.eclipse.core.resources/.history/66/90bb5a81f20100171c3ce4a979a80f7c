@@ -9,6 +9,10 @@ public class Infix2PostfixConverter {
         return (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')');
     }
 
+    public static boolean isSpace(char c){
+    	return (c == ' ');
+    }
+    
     public static boolean getPrecedence(char op1, char op2){
     	if(op1 == '+' || op1 == '-'){
     		return !(op2 == '+' || op2 == '-');
@@ -41,6 +45,8 @@ public class Infix2PostfixConverter {
     			}else{
     				s.push(x);
     			}
+    		}else if(isSpace(c)){
+    			
     		}else{
     			postfix.append(x);
     		}
@@ -50,44 +56,15 @@ public class Infix2PostfixConverter {
     	}
     	return postfix.toString();
     }
-    
-    public static int getResult(String postfix){
-    	int num1,num2,result=0;
-    	StackReferenceBased s = new StackReferenceBased();
-    	String[] num = postfix.split("");
-    	for(int i = 0; i<num.length; i++){
-    		String s1 = num[i];
-    		if(isOperator(s1.charAt(0))){
-    			s.push(Integer.parseInt(s1));
-    		}else{
-    			String s2 = num[i];
-    			num1 = (int) s.pop();
-    			num2 = (int) s.pop();
-    			if(s2.equals("+")){
-    				result = num1+num2;
-    			}else if(s2.equals("-")){
-    				result = num1-num2;
-    			}else if(s2.equals("*")){
-    				result = num1*num2;
-    			}else if(s2.equals("/")){
-    				result = num1/num2;
-    			}
-    			s.push((Object)result);
-    		}
-    	}
-    	result = (int) s.pop();
-    	return result;
-    }
 	
 	public static void main(String[] arg){
 		System.out.println("Please enter a infix: ");
 		Scanner S = new Scanner(System.in);
 		String infix = S.nextLine();
 		S.close();
-		String postfix = infixToPostfix(infix);
+
 		System.out.println("infix: " + infix);
-		System.out.println("postfix: " + postfix);
-		System.out.println("result: " + getResult(postfix));
+		System.out.println("postfix: " + infixToPostfix(infix));
 		
 	}
 }

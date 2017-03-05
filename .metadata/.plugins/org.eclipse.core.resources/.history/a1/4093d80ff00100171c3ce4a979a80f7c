@@ -23,19 +23,19 @@ public class StackReferenceBased {
 		return (top == null);
 	}
 	
-	public void push(Object o){
+	public void push(Character o){
 		top = new Node(o, top);
 		items++;
 	}
 	
-	public Object pop(){
-		Object o = top.getItem();
+	public Character pop(){
+		Character o = top.getItem();
 		top = top.getNext();
 		items--;
 		return o;
 	}
 	
-	public Object peek(){
+	public Character peek(){
 		return top.getItem();
 	}
 }

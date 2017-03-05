@@ -1,20 +1,20 @@
 package StackReferenceBased;
 
 public class Node {
-	private Object item;
+	private Character item;
 	private Node next;
 	
-	public Node (Object a){
+	public Node (Character a){
 		item = a;
 		next = null;
 	}
 	
-	public Node(Object a, Node n){
+	public Node(Character a, Node n){
 		item = a;
 		next = n;
 	}
 	
-	public Object getItem(){
+	public Character getItem(){
 		return item;
 	}
 		
@@ -22,7 +22,7 @@ public class Node {
 		return next;
 	}
 	
-	public void setItem(Object a){
+	public void setItem(Character a){
 		item = a;
 	}
 	

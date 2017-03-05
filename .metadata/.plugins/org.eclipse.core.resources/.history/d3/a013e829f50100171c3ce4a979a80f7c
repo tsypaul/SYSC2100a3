@@ -61,8 +61,8 @@ public class Infix2PostfixConverter {
     			s.push(Integer.parseInt(s1));
     		}else{
     			String s2 = num[i];
-    			num1 = (int) s.pop();
-    			num2 = (int) s.pop();
+    			num1 = Integer.parseInt(s.pop().toString());
+    			num2 = Integer.parseInt(s.pop().toString());
     			if(s2.equals("+")){
     				result = num1+num2;
     			}else if(s2.equals("-")){
