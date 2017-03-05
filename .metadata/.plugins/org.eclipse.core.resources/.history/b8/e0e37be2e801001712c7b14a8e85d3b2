@@ -1,0 +1,57 @@
+package StackReferenceBased;
+
+import java.util.Scanner;
+
+public class Infix2PostfixConverter {
+	
+	private static boolean isOperator(char c){
+        return (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')');
+    }
+
+    private static int isLowerPrecedence(char op1, char op2){
+        switch (op1){
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '(':
+            case ')':
+                return 3;
+        }
+        return -1;
+    }
+
+	
+	public static String convertInfixToPostfix(String inFix){
+		StringBuffer postFix = new StringBuffer(inFix.length());
+		//String inFix = o.toString();
+		StackReferenceBased s = new StackReferenceBased();
+		char c;
+		for(int i=0; i < inFix.length(); i++){
+			c = inFix.charAt(i);
+			if(!isOperator(c)){
+				postFix.append(c);
+			}else if(c == '('){
+				s.push(c);
+			}else if(c == ')'){
+				while(!s.isEmpty() && s.peek() != '(')
+			}
+		
+	}
+	
+	public static void main(String[] arg){
+		System.out.println("Please enter a infix: ");
+		Scanner S = new Scanner(System.in);
+		String infix = S.nextLine();
+		S.close();
+//		Object[] in = new Object [infix.length()];
+//		for (int i = 0; i < infix.length(); i++){
+//			in[i] = infix.charAt(i);
+//		}
+		System.out.println("infix: " + infix);
+		System.out.println("postfix: " + convertInfixToPostfix(infix));
+		
+	}
+}

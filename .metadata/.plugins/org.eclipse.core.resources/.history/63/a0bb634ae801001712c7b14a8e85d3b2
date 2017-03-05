@@ -1,0 +1,32 @@
+package StackReferenceBased;
+
+public class Node {
+	private String item;
+	private Node next;
+	
+	public Node (String a){
+		item = a;
+		next = null;
+	}
+	
+	public Node(String a, Node n){
+		item = a;
+		next = n;
+	}
+	
+	public Object getItem(){
+		return item;
+	}
+		
+	public Node getNext(){
+		return next;
+	}
+	
+	public void setItem(String a){
+		item = a;
+	}
+	
+	public void setNext(Node n){
+		next = n;
+	}
+}	

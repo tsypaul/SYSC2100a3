@@ -1,0 +1,14 @@
+package StackReferenceBased;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] arg){
+		System.out.println("Please enter a infix: ");
+		Scanner S = new Scanner(System.in);
+		String infix = S.nextLine();
+		S.close();
+		
+		
+	}
+}

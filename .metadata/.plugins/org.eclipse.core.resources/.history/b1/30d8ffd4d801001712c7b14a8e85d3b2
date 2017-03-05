@@ -1,0 +1,34 @@
+package StackReferenceBased;
+
+import java.util.Scanner;
+
+public class Infix2PostfixConverter {
+	
+	
+	
+	public static void convertInfixToPostfix(Object[] o){
+		StackReferenceBased s = new StackReferenceBased();
+		for (Object x : o){
+			if(x=="("){
+				s.push(x);
+			}else if(x == ")"){
+				
+			}
+		}
+	}
+	
+	public static void main(String[] arg){
+		System.out.println("Please enter a infix: ");
+		Scanner S = new Scanner(System.in);
+		String infix = S.nextLine();
+		S.close();
+		Object[] in = new Object [infix.length()];
+		for (int i = 0; i < infix.length(); i++){
+			in[i] = infix.charAt(i);
+		}
+		System.out.println("infix: " + infix);
+		convertInfixToPostfix(in);
+		System.out.println("postfix: " + infix);
+		
+	}
+}

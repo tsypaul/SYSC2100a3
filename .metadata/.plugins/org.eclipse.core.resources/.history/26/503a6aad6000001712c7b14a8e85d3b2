@@ -1,0 +1,17 @@
+package StackReferenceBased;
+
+import java.util.Scanner;
+
+public class Infix2PostfixConverter {
+	
+	
+	public static void main(String[] arg){
+		StackReferenceBased s = new StackReferenceBased();
+		System.out.println("Please enter a infix: ");
+		Scanner S = new Scanner(System.in);
+		String infix = S.nextLine();
+		S.close();
+		
+		
+	}
+}

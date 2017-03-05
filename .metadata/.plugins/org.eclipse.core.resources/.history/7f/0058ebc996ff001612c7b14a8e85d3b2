@@ -1,0 +1,9 @@
+package StackReferenceBased;
+
+public class StackReferenceBased {
+	
+	public StackReferenceBased(){
+		
+	}
+	
+}
