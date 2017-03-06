@@ -54,6 +54,7 @@ public class Infix2PostfixConverter {
     public static int getResult(String postfix){
     	int result = 0,num1,num2;
     	StackReferenceBased s = new StackReferenceBased();
+    	s.push("");
     	char c;
     	for (int i = 0; i < postfix.length(); i++){
     		c = postfix.charAt(i);

@@ -62,8 +62,8 @@ public class Infix2PostfixConverter {
     		}else if(c>'0' && c<'9'){
     			s.push(c);
     		}else if(!s.isEmpty()){
-    			num1 = Integer.parseInt(String.valueOf(s.pop()));
-    			num2 = Integer.parseInt(String.valueOf(s.pop()));
+    			num1 = Integer.parseInt("" + s.pop());
+    			num2 = Integer.parseInt("" + s.pop());
     			switch(c){
     			case '+':
     				s.push(num1+num2);

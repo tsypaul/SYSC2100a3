@@ -52,35 +52,30 @@ public class Infix2PostfixConverter {
     }
     
     public static int getResult(String postfix){
-    	int result = 0,num1,num2;
+    	int num1,num2,result=0;
     	StackReferenceBased s = new StackReferenceBased();
-    	char c;
-    	for (int i = 0; i < postfix.length(); i++){
-    		c = postfix.charAt(i);
-    		if(c == ' '){
-    			
-    		}else if(c>'0' && c<'9'){
-    			s.push(c);
-    		}else if(!s.isEmpty()){
-    			num1 = Integer.parseInt(String.valueOf(s.pop()));
-    			num2 = Integer.parseInt(String.valueOf(s.pop()));
-    			switch(c){
-    			case '+':
-    				s.push(num1+num2);
-    				break;
-    			case '-':
-    				s.push(num1-num2);
-    				break;
-    			case '*':
-    				s.push(num1*num2);
-    				break;
-    			case '/':
-    				s.push(num1/num2);
-    				break;
+    	String[] num = postfix.split("");
+    	for(int i = 0; i<num.length; i++){
+    		String s1 = num[i];
+    		if(isOperator(s1.charAt(0))){
+    			s.push(Integer.parseInt(s1));
+    		}else{
+    			String s2 = num[i];
+    			num1 = (int) s.pop();
+    			num2 = (int) s.pop();
+    			if(s2.equals("+")){
+    				result = num1+num2;
+    			}else if(s2.equals("-")){
+    				result = num1-num2;
+    			}else if(s2.equals("*")){
+    				result = num1*num2;
+    			}else if(s2.equals("/")){
+    				result = num1/num2;
     			}
+    			s.push((Object)result);
     		}
     	}
-    	result = Integer.parseInt("" + s.pop());
+    	result = (int) s.pop();
     	return result;
     }
 	
